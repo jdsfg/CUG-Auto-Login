@@ -11,7 +11,7 @@
 
 ## ⚙️ 工作原理
 
-本脚本利用您路由器搭建的稳定内网 (WISP 模式)，每隔 5 分钟检测一次百度连通性。一旦发现网络断开，则立即向认证服务器 (192.168.167.115) 发送带学号密码的登录请求，确保网络不中断。
+本脚本为 CUG 校园网用户提供 Systemd 服务，自动在后台检测网络状态，并在断线后使用 Python 脚本自动完成深澜 (Srun) 认证登录。
 
 ## 🚀 部署指南 (Deploy)
 
@@ -20,11 +20,11 @@
 * 操作系统: Ubuntu 20.04+ (服务器/WSL)
 * Python: 3.6+
 * 依赖: `requests` 库
+  
+### 2.流程
 
-### 2. 配置账号
+1.  将 `config.sample.json` 复制为 `config.json`，并填入您的学号、密码和 `ac_id=3`。
+2.  安装依赖：`pip3 install requests`
+3.  配置 Systemd 服务启动 `main.py`。
 
-请将 `config.sample.json` 文件复制为 `config.json`，并填入你的真实信息。
-
-```bash
-cp config.sample.json config.json
-nano config.json
+---
